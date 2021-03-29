@@ -3,7 +3,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Book(SqlAlchemyBase):
-    __tablename__ = 'users'
+    __tablename__ = 'books'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
