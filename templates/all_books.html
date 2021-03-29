@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+    {% for item in books['books'] %}
+        <h2>{{item['title']}}</h2>
+        <div>{{item["description"]}}</div>
+    {% endfor %}
+</body>
+</html>
