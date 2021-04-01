@@ -3,8 +3,8 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/create_a_book', methods=['GET', 'POST'])
+def new_book():
     form = UploadForm()
     if form.validate_on_submit():
         return redirect('/success')
