@@ -1,19 +1,28 @@
 from flask import Flask, render_template, redirect
 import os
 from .forms.user import RegisterForm
-from .forms.upload import UploadForm
+from .forms.book import RedactorForm
 from .data import db_session
 import flask_login
 
 app = Flask(__name__)
 
 
-@app.route('/create_a_book', methods=['GET', 'POST'])
+@app.route('/redactor', methods=['GET', 'POST'])
 def new_book():
-    form = UploadForm()
+    form = RedactorForm()
     if form.validate_on_submit():
-        return redirect('/success')
-    return render_template('upload.html', title='Добавить книгу', form=form)
+                book = Book(
+            title=form.title.data,
+            author=form.author.data,
+            sinopsis=form.sinopsis.data,
+            text=form.text.data
+            tag=form.tag.data
+        )
+        db_sess.add(book)
+        db_sess.commit()
+        return redirect('/my_page')
+    return render_template('profile.html', tilte='Моя страница', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
