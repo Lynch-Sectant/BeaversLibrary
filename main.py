@@ -36,6 +36,16 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
+@app.route('/my_page' methods=['GET', 'POST'])
+def my_page():
+    db_sess = db_session.create_session()
+    if db_sess.query(Book).filter(Book.author == current_user).all():
+        my_books = db_sess.query(Book).filter(Book.author == current_user).all()
+        return render_template('profile.html', tilte='Моя страница')
+    else:
+        my_books = ['У вас нет книг']
+        return render_template('profile.html', tilte='Моя страница')
+    
 def main():
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
