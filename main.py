@@ -1,8 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template, redirect
 import os
 from .forms.user import RegisterForm
+from .forms.upload import UploadForm
+from .data import db_session
+import flask_login
 
 app = Flask(__name__)
+
 
 @app.route('/create_a_book', methods=['GET', 'POST'])
 def new_book():
@@ -36,7 +40,8 @@ def reqister():
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
-@app.route('/my_page' methods=['GET', 'POST'])
+
+@app.route('/my_page', methods=['GET', 'POST'])
 def my_page():
     db_sess = db_session.create_session()
     if db_sess.query(Book).filter(Book.author == current_user).all():
@@ -45,7 +50,8 @@ def my_page():
     else:
         my_books = ['У вас нет книг']
         return render_template('profile.html', tilte='Моя страница')
-    
+
+
 def main():
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
