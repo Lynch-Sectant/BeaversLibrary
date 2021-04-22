@@ -12,16 +12,18 @@ app = Flask(__name__)
 def new_book():
     form = RedactorForm()
     if form.validate_on_submit():
-                book = Book(
+        book = db_session.Book(
             title=form.title.data,
             author=form.author.data,
             sinopsis=form.sinopsis.data,
-            text=form.text.data
+            text=form.text.data,
             tag=form.tag.data
         )
-        db_sess.add(book)
-        db_sess.commit()
-        return redirect('/my_page')
+    db_session.add(book)
+    db_session.commit()
+    return redirect('/my_page')
+
+
     return render_template('profile.html', tilte='Моя страница', form=form)
 
 
@@ -34,11 +36,11 @@ def reqister():
                                    form=form,
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form.email.data).first():
+        if db_sess.query(db_session.User).filter(db_session.User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = User(
+        user = db_session.User(
             name=form.name.data,
             email=form.email.data,
             about=form.about.data
@@ -53,8 +55,8 @@ def reqister():
 @app.route('/my_page', methods=['GET', 'POST'])
 def my_page():
     db_sess = db_session.create_session()
-    if db_sess.query(Book).filter(Book.author == current_user).all():
-        my_books = db_sess.query(Book).filter(Book.author == current_user).all()
+    if db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all():
+        my_books = db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all()
         return render_template('profile.html', tilte='Моя страница')
     else:
         my_books = ['У вас нет книг']
