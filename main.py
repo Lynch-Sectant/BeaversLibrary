@@ -1,6 +1,6 @@
 from flask import Flask
 import os
-from forms.user import RegisterForm
+from .forms.user import RegisterForm
 
 app = Flask(__name__)
 
