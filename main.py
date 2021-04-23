@@ -1,11 +1,26 @@
 from flask import Flask, render_template, redirect
 import os
-from .forms.user import RegisterForm
-from .forms.book import RedactorForm
-from .data import db_session
+from forms.user import RegisterForm
+from forms.book import RedactorForm
+from data import db_session
+from flask_wtf import FlaskForm
 import flask_login
 
 app = Flask(__name__)
+
+
+@app.route('/') # тест проги
+def start():
+    greeting = f'''<html>
+        <head>
+        <title>Привет, Марс!</title>
+        </head>
+        <body>
+        <h1>Жди нас, Марс!</h1>
+        <div>Вот она какая, красная планета</div>
+        <body>
+        </html>'''
+    return greeting
 
 
 @app.route('/redactor', methods=['GET', 'POST'])
@@ -19,11 +34,9 @@ def new_book():
             text=form.text.data,
             tag=form.tag.data
         )
-    db_session.add(book)
-    db_session.commit()
-    return redirect('/my_page')
-
-
+        db_session.add(book)
+        db_session.commit()
+        return redirect('/my_page')
     return render_template('profile.html', tilte='Моя страница', form=form)
 
 
