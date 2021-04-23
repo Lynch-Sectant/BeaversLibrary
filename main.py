@@ -70,10 +70,10 @@ def my_page():
     db_sess = db_session.create_session()
     if db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all():
         my_books = db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all()
-        return render_template('profile.html', tilte='Моя страница')
+        return render_template('profile.html', title='Моя страница', user_books=my_books)
     else:
         my_books = ['У вас нет книг']
-        return render_template('profile.html', tilte='Моя страница')
+        return render_template('profile.html', title='Моя страница')
 
 
 def main():
