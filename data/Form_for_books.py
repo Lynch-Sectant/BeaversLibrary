@@ -14,5 +14,4 @@ class Book(SqlAlchemyBase):
     text = sqlalchemy.Column(sqlalchemy.Text, unique=True, nullable=True)
     tag_from_length = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     tag = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
-    tag_rel = orm.relation('Tag')
     rate = sqlalchemy.Column(sqlalchemy.Float, default=5.0)
