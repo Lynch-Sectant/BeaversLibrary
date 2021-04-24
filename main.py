@@ -26,12 +26,19 @@ def start():
 @app.route('/redactor', methods=['GET', 'POST'])
 def new_book():
     form = RedactorForm()
+    if len(form.text.data) <= 40000:
+        length = 'короткий'
+    if len(form.text.data) < 40000 and len(form.text.data) <= 80000:
+        length = 'средний':
+    if len(form.text.data) > 80000:
+        length = 'длинный'
     if form.validate_on_submit():
         book = db_session.Book(
             title=form.title.data,
             author=form.author.data,
             sinopsis=form.sinopsis.data,
             text=form.text.data,
+            tag_from_length = length,
             tag=form.tag.data
         )
         db_session.add(book)
