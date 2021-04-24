@@ -49,8 +49,8 @@ def hide(update, context):
 
 def review(update, context):
     update.message.reply_text("Напишите ваш отзыв")
-    recall = update.message.text  # вот это пременная для отзыва ТУТ БАГА
-    print(recall)
+    recall = message.text  # вот это пременная для отзыва ТУТ БАГА
+    update.message.reply_text(recall)
 
 
 def main():
