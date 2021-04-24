@@ -73,6 +73,7 @@ def reqister():
 
 
 @app.route('/my_page', methods=['GET', 'POST'])
+@login_required
 def my_page():
     db_sess = db_session.create_session()
     if db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all():
