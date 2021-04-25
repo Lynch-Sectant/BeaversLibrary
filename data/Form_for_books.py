@@ -10,7 +10,7 @@ class Book(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     author = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("authors.id"))
-    author_rel = orm.relation('Users')
+    author_rel = orm.relation('User')
     sinopsis = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     text = sqlalchemy.Column(sqlalchemy.Text, unique=True, nullable=True)
     tag_from_length = sqlalchemy.Column(sqlalchemy.String, nullable=True)
