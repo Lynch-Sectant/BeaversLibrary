@@ -3,18 +3,13 @@ import os
 from forms.user import RegisterForm
 from forms.book import RedactorForm
 from data import db_session
+from flask_login import login_required
 from flask_wtf import FlaskForm
 import flask_login
 from flask_login import LoginManager
-
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(user_id):
-    db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
 
 @app.route('/') # тест проги
 def start():
@@ -36,7 +31,7 @@ def new_book():
     if len(form.text.data) <= 40000:
         length = 'короткий'
     if len(form.text.data) < 40000 and len(form.text.data) <= 80000:
-        length = 'средний':
+        length = 'средний'
     if len(form.text.data) > 80000:
         length = 'длинный'
     if form.validate_on_submit():
