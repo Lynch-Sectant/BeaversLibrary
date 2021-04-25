@@ -64,7 +64,7 @@ def reqister():
                                    form=form,
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
-        if db_sess.query(db_session.User).filter(db_session.User.email == form.email.data).first():
+        if db_sess.query(User).filter(User.email == form.email.data).first():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
@@ -84,8 +84,8 @@ def reqister():
 @login_required
 def my_page():
     db_sess = db_session.create_session()
-    if db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all():
-        my_books = db_sess.query(db_session.Book).filter(db_session.Book.author == db_session.User.current_user).all()
+    if db_sess.query(db_session.Book).filter(db_session.Book.author == User.current_user).all():
+        my_books = db_sess.query(db_session.Book).filter(db_session.Book.author == User.current_user).all()
         return render_template('profile.html', title='Моя страница', user_books=my_books)
     else:
         my_books = ['У вас нет книг']
