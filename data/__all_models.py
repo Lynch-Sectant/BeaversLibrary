@@ -1,3 +1,3 @@
-from . import Form_for_users
-from . import Form_for_books
-from . import Form_for_tags
+from .Form_for_users import User
+from .Form_for_books import Book
+from .Form_for_tags import Tag
