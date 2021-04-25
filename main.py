@@ -5,9 +5,10 @@ from forms.book import RedactorForm
 from data import db_session
 from flask_wtf import FlaskForm
 import flask_login
-
+from flask_login import LoginManager
 app = Flask(__name__)
-
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 @app.route('/') # тест проги
 def start():
