@@ -1,5 +1,6 @@
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlachemy import orm
 
 
 class Book(SqlAlchemyBase):
