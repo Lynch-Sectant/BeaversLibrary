@@ -10,7 +10,7 @@ TOKEN = '1562678469:AAElhuGF-neaanXq-pRzuDgFCdwZMGi_vkg'
 
 
 reply_keyboard = [['/start', '/end', '/info', '/login'],
-                  ['/time', '/error', '/hide', '/review']]
+                  ['/time', '/error', '/hide']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 
 updater = Updater(TOKEN, use_context=True)
@@ -47,11 +47,6 @@ def hide(update, context):
         reply_markup=ReplyKeyboardRemove()
                               )
 
-def review(update, context):
-    update.message.reply_text("Напишите ваш отзыв")
-    recall = message.text  # вот это пременная для отзыва ТУТ БАГА
-    update.message.reply_text(recall)
-
 
 def main():
     updater = Updater(TOKEN, use_context=True)
@@ -63,7 +58,6 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("end", end))
     dp.add_handler(CommandHandler("hide", hide))
-    dp.add_handler(CommandHandler("review", review))
     updater.start_polling()
     updater.idle()
 
