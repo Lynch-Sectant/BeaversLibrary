@@ -68,7 +68,7 @@ def reqister():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
-        user = db_session.User(
+        user = User(
             name=form.name.data,
             email=form.email.data,
             about=form.about.data
