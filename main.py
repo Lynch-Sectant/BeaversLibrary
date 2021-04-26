@@ -7,6 +7,7 @@ from forms.book import RedactorForm
 from flask_login import login_required
 import flask_login
 from flask_login import LoginManager
+from data.Form_for_users import User
 
 app = Flask(__name__)
 login_manager = LoginManager()
