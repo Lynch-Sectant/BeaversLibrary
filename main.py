@@ -62,6 +62,7 @@ def new_book():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
+    db_session.global_init('db.db')
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
