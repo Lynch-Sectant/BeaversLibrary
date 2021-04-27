@@ -8,6 +8,7 @@ from flask_login import login_required
 import flask_login
 from flask_login import LoginManager
 from data.Form_for_users import User
+from data.Form_for_login import LoginForm
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -97,6 +98,14 @@ def my_page():
         return render_template('profile.html', title='Моя страница')
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return redirect('/success')
+    return render_template('login.html', title='Авторизация', form=form)
+
+
 def main():
     db_session.global_init('db.db')
     port = int(os.environ.get("PORT", 5000))
@@ -105,4 +114,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
