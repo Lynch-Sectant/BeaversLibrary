@@ -103,7 +103,7 @@ def my_page():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect('/success')
+        return redirect('/my_page')
     return render_template('login.html', title='Авторизация', form=form)
 
 
@@ -115,5 +115,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
