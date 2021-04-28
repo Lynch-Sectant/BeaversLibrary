@@ -103,6 +103,7 @@ def my_page():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        login_user(user, remember=form.remember_me.data)
         return redirect('/my_page')
     return render_template('login.html', title='Авторизация', form=form)
 
