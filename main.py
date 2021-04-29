@@ -9,6 +9,7 @@ import flask_login
 from flask_login import LoginManager
 from data.Form_for_users import User
 from data.Form_for_login import LoginForm
+from flask_login import login_user
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -103,6 +104,7 @@ def my_page():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
         login_user(user, remember=form.remember_me.data)
         return redirect('/my_page')
     return render_template('login.html', title='Авторизация', form=form)
