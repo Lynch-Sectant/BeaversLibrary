@@ -91,10 +91,11 @@ def reqister():
 @app.route('/my_page', methods=['GET', 'POST'])
 @login_required
 def my_page():
+    id_user = current_user.id
     db_sess = db_session.create_session()
-    if db_sess.query(Book).filter(Book.author == current_user).all():
+    if db_sess.query(Book).filter(Book.author == id_user).all():
         my_books = [i[1] for i in
-                    db_sess.query(Book).filter(Book.author == current_user).all()]
+                    db_sess.query(Book).filter(Book.author == id_user).all()]
         return render_template('profile.html', title='Моя страница', user_books=my_books)
     else:
         my_books = ['У вас нет книг']
