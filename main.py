@@ -5,9 +5,10 @@ from flask_wtf import FlaskForm
 from forms.user import RegisterForm
 from forms.book import RedactorForm
 from flask_login import login_required
-import flask_login
+from flask_login import current_user
 from flask_login import LoginManager
 from data.Form_for_users import User
+from data.Form_for_books import Book
 from data.Form_for_login import LoginForm
 from flask_login import login_user
 
@@ -91,9 +92,9 @@ def reqister():
 @login_required
 def my_page():
     db_sess = db_session.create_session()
-    if db_sess.query(db_session.Book).filter(db_session.Book.author == User.current_user).all():
+    if db_sess.query(Book).filter(Book.author == current_user).all():
         my_books = [i[1] for i in
-                    db_sess.query(db_session.Book).filter(db_session.Book.author == User.current_user).all()]
+                    db_sess.query(Book).filter(Book.author == current_user).all()]
         return render_template('profile.html', title='Моя страница', user_books=my_books)
     else:
         my_books = ['У вас нет книг']
@@ -102,6 +103,7 @@ def my_page():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    db_sess = db_session.create_session()
     form = LoginForm()
     if form.validate_on_submit():
         user = db_sess.query(User).filter(User.email == form.email.data).first()
@@ -118,4 +120,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
