@@ -60,7 +60,7 @@ def new_book():
         db_session.add(book)
         db_session.commit()
         return redirect('/my_page')
-    return render_template('profile.html', tilte='Моя страница', form=form)
+    return render_template('execute.html', tilte='Beaver`s book', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
