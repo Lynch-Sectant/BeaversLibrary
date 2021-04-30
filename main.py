@@ -96,7 +96,7 @@ def my_page():
     id_user = current_user.id
     db_sess = db_session.create_session()
     if db_sess.query(Book).filter(Book.author == id_user).all():
-        my_books = [i[1] for i in
+        my_books = [i.title for i in
                     db_sess.query(Book).filter(Book.author == id_user).all()]
         return render_template('profile.html', title='Моя страница', user_books=my_books)
     else:
