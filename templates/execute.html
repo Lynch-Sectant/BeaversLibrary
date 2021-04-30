@@ -1,31 +1,36 @@
-<!doctype html>
-                        <html lang="en">
-                          <head>
-                            <meta charset="utf-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                            <link rel="stylesheet"
-                            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-                            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-                            crossorigin="anonymous">
-                            <link rel="stylesheet" type="text/css" href="{url_for('static', filename='css/style.css')}" />
-                            <title>Редактор</title>
-                          </head>
-                          <body>
-                            <h1>Редактор книги</h1>
-                            <div>
-                                <form class="login_form" method="post">
-                                    <label for="name">Введите название произведения</label>
-                                    <input type="name" class="form-control" id="name" placeholder="Название" name="name">
-                                    <label for="sinopsis">Введите синопсис (краткое содержание, "трейлер" вашей книги)</label>
-                                    <input type="sinopsis" class="form-control" id="sinopsis" placeholder="Без спойлеров!" name="sinopsis">
+{% extends "base.html" %}
 
-                                    <div class="form-group">
-                                        <label for="text">Введите текст вашего произведения</label>
-                                        <textarea class="form-control" id="text" rows="40" name="text"></textarea>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Опубликовать</button>
-                                </form>
-                            </div>
-                          </body>
-                        </html>
+{% block content %}
+<h1>Редактирование</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(class="form-control") }}<br>
+        {% for error in form.title.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.sinopsis.label }}<br>
+        {{ form.sinopsis(class="form-control") }}<br>
+        {% for error in form.sinopsis.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.text.label }}<br>
+        {{ form.text(class="form-control") }}<br>
+        {% for error in form.text.errors %}
+            <p content="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+{% endblock %}
