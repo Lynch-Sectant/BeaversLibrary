@@ -49,13 +49,13 @@ def new_book():
             length = 'средний'
         elif len(form.text.data) > 80000:
             length = 'длинный'
-            book = db_session.Book(
-                title=form.title.data,
-                author=form.author.data,
-                sinopsis=form.sinopsis.data,
-                text=form.text.data,
-                tag_from_length=length,
-                tag=form.tag.data
+        book = db_session.Book(
+            title=form.title.data,
+            author=form.author.data,
+            sinopsis=form.sinopsis.data,
+            text=form.text.data,
+            tag_from_length=length,
+            tag=form.tag.data
             )
         db_session.add(book)
         db_session.commit()
