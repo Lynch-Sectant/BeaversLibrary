@@ -106,6 +106,7 @@ def my_page():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    db_session.global_init('db.db')
     db_sess = db_session.create_session()
     form = LoginForm()
     if form.validate_on_submit():
